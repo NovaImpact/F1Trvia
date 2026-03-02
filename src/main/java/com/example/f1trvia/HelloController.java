@@ -32,7 +32,6 @@ public class HelloController {
     @FXML private Label feedbackLabel;
     @FXML private Button nextButton;
 
-    // Result
     @FXML private Label finalScoreLabel;
     @FXML private Label accuracyLabel;
     @FXML private Label resultMessageLabel;
@@ -68,9 +67,9 @@ public class HelloController {
         loadingLabel.setText("Loading 2024 Bahrain GP Practice data...");
 
         Thread fetchThread = new Thread(() -> {
-            List<F1ApiData> fp1 = F1ApiService.fetchSession(round, "fp1");
-            List<F1ApiData> fp2 = F1ApiService.fetchSession(round, "fp2");
-            List<F1ApiData> fp3 = F1ApiService.fetchSession(round, "fp3");
+            List<F1ApiData> fp1 = F1ApiService.fetchSession("fp1");
+            List<F1ApiData> fp2 = F1ApiService.fetchSession("fp2");
+            List<F1ApiData> fp3 = F1ApiService.fetchSession("fp3");
 
             Platform.runLater(() -> {
                 boolean hasData = !fp1.isEmpty() || !fp2.isEmpty() || !fp3.isEmpty();
