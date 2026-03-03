@@ -1,135 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
-<StackPane xmlns:fx="http://javafx.com/fxml"
-           fx:controller="com.example.f1trvia.HelloController"
-           style="-fx-background-color: #0f0f1a;">
+<StackPane style="-fx-background-color: #0f0f1a;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/25" fx:controller="com.example.f1trvia.HelloController">
 
-    <!-- =================== MENU SCREEN =================== -->
-    <VBox fx:id="menuScreen" alignment="CENTER" spacing="18"
-          style="-fx-background-color: #0f0f1a;">
-        <padding><Insets top="40" bottom="40" left="60" right="60"/></padding>
+    <VBox fx:id="menuScreen" alignment="CENTER" spacing="14" style="-fx-background-color: #f5f5f5;">
+        <padding><Insets bottom="30" left="60" right="60" top="30" /></padding>
 
-        <Label text="🏎  F1 TRIVIA EXPERIENCE"
-               style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #e10600;"/>
-        <Label text="2024 Bahrain GP — Practice Sessions"
-               style="-fx-font-size: 14px; -fx-text-fill: #aaaaaa;"/>
+        <Label style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #e10600;" text="F1 TRIVIA EXPERIENCE" />
+        <Label style="-fx-font-size: 13px; -fx-text-fill: #e10600;" text="Choose your race, year and sessions" />
 
-        <Separator style="-fx-background-color: #333;"/>
+        <Separator style="-fx-background-color: #333;" />
 
-        <Label text="Select Difficulty:"
-               style="-fx-text-fill: white; -fx-font-size: 13px;"/>
-        <ComboBox fx:id="difficultyBox" prefWidth="280"
-                  style="-fx-background-color: #1e1e2e; -fx-text-fill: white;"/>
+        <Label style="-fx-text-fill: #e10600; -fx-font-size: 13px;" text="Select Year:" />
+        <ComboBox fx:id="yearBox" prefWidth="280" style="-fx-background-color: #1e1e2e; -fx-text-fill: white;" />
 
-        <Label fx:id="highScoreLabel" text="High Score: --"
-               style="-fx-text-fill: #f39c12; -fx-font-size: 13px;"/>
+        <Label style="-fx-text-fill: #e10600; -fx-font-size: 13px;" text="Select Circuit:" />
+        <ComboBox fx:id="circuitBox" prefWidth="280" style="-fx-background-color: #1e1e2e; -fx-text-fill: white;" />
+        <Label fx:id="circuitStatusLabel" style="-fx-text-fill: #f39c12; -fx-font-size: 11px;" text="" />
 
-        <Button text="🚦  START QUIZ" onAction="#onStartQuiz"
-                prefWidth="200" prefHeight="45"
-                style="-fx-background-color: #e10600; -fx-text-fill: white;
-                       -fx-font-size: 15px; -fx-font-weight: bold; -fx-cursor: hand;"/>
-
-        <Label text="Questions generated from live FP1, FP2 and FP3 data"
-               style="-fx-text-fill: #555; -fx-font-size: 11px;"/>
-    </VBox>
-
-    <!-- =================== LOADING SCREEN =================== -->
-    <VBox fx:id="loadingScreen" alignment="CENTER" spacing="20" visible="false"
-          style="-fx-background-color: #0f0f1a;">
-        <Label text="⏳  Loading..."
-               style="-fx-font-size: 22px; -fx-text-fill: white;"/>
-        <Label fx:id="loadingLabel" text="Fetching F1 data..."
-               style="-fx-text-fill: #aaaaaa; -fx-font-size: 13px;"/>
-        <ProgressIndicator style="-fx-progress-color: #e10600;"/>
-    </VBox>
-
-    <!-- =================== QUIZ SCREEN =================== -->
-    <VBox fx:id="quizScreen" alignment="TOP_CENTER" spacing="14" visible="false"
-          style="-fx-background-color: #0f0f1a;">
-        <padding><Insets top="25" bottom="25" left="50" right="50"/></padding>
-
-        <HBox alignment="CENTER_LEFT" spacing="20">
-            <Label fx:id="questionNumberLabel" text="Question 1 / 10"
-                   style="-fx-text-fill: #aaaaaa; -fx-font-size: 12px;"/>
-            <Region HBox.hgrow="ALWAYS"/>
-            <Label fx:id="scoreLabel" text="Score: 0"
-                   style="-fx-text-fill: #f39c12; -fx-font-size: 14px; -fx-font-weight: bold;"/>
+        <Label style="-fx-text-fill: #e10600; -fx-font-size: 13px;" text="Select Practice Sessions:" />
+        <HBox alignment="CENTER" spacing="20">
+            <CheckBox fx:id="fp1Check" style="-fx-text-fill: #e10600;" text="FP1" />
+            <CheckBox fx:id="fp2Check" style="-fx-text-fill: #e10600;" text="FP2" />
+            <CheckBox fx:id="fp3Check" style="-fx-text-fill: #e10600;" text="FP3" />
         </HBox>
 
-        <ProgressBar fx:id="progressBar" prefWidth="600" progress="0"
-                     style="-fx-accent: #e10600;"/>
+        <Label style="-fx-text-fill: #e10600; -fx-font-size: 13px;" text="Select Difficulty:" />
+        <ComboBox fx:id="difficultyBox" prefWidth="280" style="-fx-background-color: #1e1e2e; -fx-text-fill: white;" />
 
-        <Label fx:id="questionLabel" text="Question text here"
-               wrapText="true" prefWidth="600"
-               style="-fx-font-size: 18px; -fx-text-fill: white; -fx-font-weight: bold;
-                      -fx-padding: 20 0 10 0;"/>
+        <Label fx:id="highScoreLabel" style="-fx-text-fill: #e10600; -fx-font-size: 13px;" text="High Score: --" />
 
-        <Button fx:id="choiceA" text="A" onAction="#onChoiceA"
-                prefWidth="600" prefHeight="50" wrapText="true"
-                style="-fx-background-color: #2a2a3e; -fx-text-fill: white;
-                       -fx-font-size: 13px; -fx-cursor: hand; -fx-alignment: CENTER_LEFT;
-                       -fx-padding: 0 15 0 15;"/>
-        <Button fx:id="choiceB" text="B" onAction="#onChoiceB"
-                prefWidth="600" prefHeight="50" wrapText="true"
-                style="-fx-background-color: #2a2a3e; -fx-text-fill: white;
-                       -fx-font-size: 13px; -fx-cursor: hand; -fx-alignment: CENTER_LEFT;
-                       -fx-padding: 0 15 0 15;"/>
-        <Button fx:id="choiceC" text="C" onAction="#onChoiceC"
-                prefWidth="600" prefHeight="50" wrapText="true"
-                style="-fx-background-color: #2a2a3e; -fx-text-fill: white;
-                       -fx-font-size: 13px; -fx-cursor: hand; -fx-alignment: CENTER_LEFT;
-                       -fx-padding: 0 15 0 15;"/>
-        <Button fx:id="choiceD" text="D" onAction="#onChoiceD"
-                prefWidth="600" prefHeight="50" wrapText="true"
-                style="-fx-background-color: #2a2a3e; -fx-text-fill: white;
-                       -fx-font-size: 13px; -fx-cursor: hand; -fx-alignment: CENTER_LEFT;
-                       -fx-padding: 0 15 0 15;"/>
+        <Button onAction="#onStartQuiz" prefHeight="45" prefWidth="200" style="-fx-background-color: #e10600; -fx-text-fill: white;                        -fx-font-size: 15px; -fx-font-weight: bold; -fx-cursor: hand;" text="START QUIZ" />
 
-        <Label fx:id="feedbackLabel" text=""
-               style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
-
-        <Button fx:id="nextButton" text="Next Question ▶" onAction="#onNextQuestion"
-                visible="false" prefWidth="200" prefHeight="40"
-                style="-fx-background-color: #e10600; -fx-text-fill: white;
-                       -fx-font-size: 13px; -fx-cursor: hand;"/>
+        <Label style="-fx-text-fill: #555; -fx-font-size: 11px;" />
     </VBox>
 
-    <!-- =================== RESULT SCREEN =================== -->
-    <VBox fx:id="resultScreen" alignment="CENTER" spacing="16" visible="false"
-          style="-fx-background-color: #0f0f1a;">
-        <padding><Insets top="40" bottom="40" left="60" right="60"/></padding>
+    <VBox fx:id="loadingScreen" alignment="CENTER" spacing="20" style="-fx-background-color: #f5f5f5;" visible="false">
+        <Label style="-fx-font-size: 22px; -fx-text-fill: #e10600;" text="⏳  Loading..." />
+        <Label fx:id="loadingLabel" style="-fx-text-fill: #aaaaaa; -fx-font-size: 13px;" text="Fetching F1 data..." />
+        <ProgressIndicator style="-fx-progress-color: #e10600;" />
+    </VBox>
 
-        <Label text="🏁  RACE COMPLETE!"
-               style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #e10600;"/>
+    <VBox fx:id="quizScreen" alignment="TOP_CENTER" spacing="14" style="-fx-background-color: #f5f5f5;" visible="false">
+        <padding><Insets bottom="25" left="50" right="50" top="25" /></padding>
 
-        <Separator style="-fx-background-color: #333;"/>
+        <HBox alignment="CENTER_LEFT" spacing="20">
+            <Label fx:id="questionNumberLabel" style="-fx-text-fill: #e10600; -fx-font-size: 12px;" text="Question 1 / 10" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Label fx:id="scoreLabel" style="-fx-text-fill: #e10600; -fx-font-size: 14px; -fx-font-weight: bold;" text="Score: 0" />
+        </HBox>
 
-        <Label fx:id="finalScoreLabel" text="Final Score: 0"
-               style="-fx-font-size: 22px; -fx-text-fill: white; -fx-font-weight: bold;"/>
-        <Label fx:id="accuracyLabel" text="Accuracy: 0%"
-               style="-fx-font-size: 14px; -fx-text-fill: #aaaaaa;"/>
-        <Label fx:id="resultMessageLabel" text=""
-               style="-fx-font-size: 16px; -fx-text-fill: #f39c12; -fx-font-weight: bold;"
-               wrapText="true"/>
+        <ProgressBar fx:id="progressBar" prefWidth="600" progress="0" style="-fx-accent: #e10600;" />
 
-        <Separator style="-fx-background-color: #333;"/>
+        <Label fx:id="questionLabel" prefWidth="600" style="-fx-font-size: 18px; -fx-text-fill: #e10600; -fx-font-weight: bold; -fx-padding: 20 0 10 0;" text="Question text here" wrapText="true" />
 
-        <Label fx:id="leaderboardLabel" text=""
-               style="-fx-font-size: 13px; -fx-text-fill: #dddddd;"
-               wrapText="true"/>
+        <Button fx:id="choiceA" onAction="#onChoiceA" prefHeight="50" prefWidth="600" style="-fx-background-color: #fc0c05; -fx-text-fill: white; -fx-font-size: 13px; -fx-cursor: hand;" text="A" wrapText="true" />
+        <Button fx:id="choiceB" onAction="#onChoiceB" prefHeight="50" prefWidth="600" style="-fx-background-color: #ed0902; -fx-text-fill: white; -fx-font-size: 13px; -fx-cursor: hand;" text="B" wrapText="true" />
+        <Button fx:id="choiceC" onAction="#onChoiceC" prefHeight="50" prefWidth="600" style="-fx-background-color: #fc0903; -fx-text-fill: white; -fx-font-size: 13px; -fx-cursor: hand;" text="C" wrapText="true" />
+        <Button fx:id="choiceD" onAction="#onChoiceD" prefHeight="50" prefWidth="600" style="-fx-background-color: #f52822; -fx-text-fill: white; -fx-font-size: 13px; -fx-cursor: hand;" text="D" wrapText="true" />
+
+        <Label fx:id="feedbackLabel" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="" />
+
+        <Button fx:id="nextButton" onAction="#onNextQuestion" prefHeight="40" prefWidth="200" style="-fx-background-color: #e10600; -fx-text-fill: white;                        -fx-font-size: 13px; -fx-cursor: hand;" text="Next Question ▶" visible="false" />
+    </VBox>
+
+    <VBox fx:id="resultScreen" alignment="CENTER" spacing="16" style="-fx-background-color: #f5f5f5;" visible="false">
+        <padding><Insets bottom="40" left="60" right="60" top="40" /></padding>
+
+        <Label style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #e10600;" text="🏁  RACE COMPLETE!" />
+
+        <Separator style="-fx-background-color: #333;" />
+
+        <Label fx:id="finalScoreLabel" style="-fx-font-size: 22px; -fx-text-fill: white; -fx-font-weight: bold;" text="Final Score: 0" />
+        <Label fx:id="accuracyLabel" style="-fx-font-size: 14px; -fx-text-fill: #aaaaaa;" text="Accuracy: 0%" />
+        <Label fx:id="resultMessageLabel" style="-fx-font-size: 16px; -fx-text-fill: #f39c12; -fx-font-weight: bold;" text="" wrapText="true" />
+
+        <Separator style="-fx-background-color: #333;" />
+
+        <Label fx:id="leaderboardLabel" style="-fx-font-size: 13px; -fx-text-fill: #dddddd;" text="" wrapText="true" />
 
         <HBox alignment="CENTER" spacing="20">
-            <Button text="🔄  Play Again" onAction="#onPlayAgain"
-                    prefWidth="160" prefHeight="42"
-                    style="-fx-background-color: #e10600; -fx-text-fill: white;
-                           -fx-font-size: 13px; -fx-cursor: hand;"/>
-            <Button text="🏠  Main Menu" onAction="#onMainMenu"
-                    prefWidth="160" prefHeight="42"
-                    style="-fx-background-color: #333355; -fx-text-fill: white;
-                           -fx-font-size: 13px; -fx-cursor: hand;"/>
+            <Button onAction="#onPlayAgain" prefHeight="42" prefWidth="160" style="-fx-background-color: #e10600; -fx-text-fill: white;                            -fx-font-size: 13px; -fx-cursor: hand;" text="Play Again" />
+            <Button onAction="#onMainMenu" prefHeight="42" prefWidth="160" style="-fx-background-color: #333355; -fx-text-fill: white;                            -fx-font-size: 13px; -fx-cursor: hand;" text="Main Menu" />
         </HBox>
     </VBox>
 
